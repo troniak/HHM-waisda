@@ -102,11 +102,11 @@ public class Game {
 	}
 	
 	public boolean acceptsNewTagEntryAt(int time) {
-		int elapsed = getElapsed();
-		int lowerBound = Math.max(0, elapsed - ACCEPTABLE_LAG_MS);
-		int upperBound = Math.min(elapsed, video.getDuration());
-		return time >= lowerBound && time <= upperBound;
-        //return true; //ignore lag requirement
+		//int elapsed = getElapsed();
+		//int lowerBound = Math.max(0, elapsed - ACCEPTABLE_LAG_MS);
+		//int upperBound = Math.min(elapsed, video.getDuration());
+		//return time >= lowerBound && time <= upperBound;
+        return true; //ignore lag requirement
 	}
 	
 	public String getFormattedDay() {
