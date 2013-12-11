@@ -28,5 +28,9 @@
 /* custom components added by @huijkman, @q42 */
 @import "components.css";
 
+/* HTML5 video tutorial classes */
+@import "treehouse.css"; 
+
 /* Utility classes */
 @import "utilities.css"; /* Has to be last to override when necessary */
+

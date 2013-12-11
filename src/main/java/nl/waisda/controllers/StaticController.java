@@ -33,4 +33,5 @@ public class StaticController {
 	public String robots() {
 		return "redirect:/static/robots.txt";
 	}
+	
 }

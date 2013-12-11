@@ -97,6 +97,10 @@ public class GameController {
 
 		return "redirect:/game/" + game.getId();
 	}
+	@RequestMapping("/vidtest")
+	public String vidtest(){
+        return "vidtest";
+    }
 	
 	@RequestMapping("/game/{gameId}")
 	public String game(@PathVariable int gameId, ModelMap model, HttpSession session)
