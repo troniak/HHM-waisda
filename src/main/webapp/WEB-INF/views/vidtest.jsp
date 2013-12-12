@@ -28,12 +28,18 @@
             <!-- Video Controls -->
             <div id="video-controls">
                 <button type="button" id="play-pause">P</button>
-                <input type="range" id="seek-bar" value="0">
+                <input class="range" type="range" id="seek-bar"  value="0">
                 <button type="button" id="step-back">&lt;</button>
                 <button type="button" id="step-forward">&gt;</button>
                 <button type="button" id="mute">M</button>
                 <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
                 <button type="button" id="full-screen">Full-Screen</button>
+            </div>
+            <div id="video-controls2">
+                <input class="range" type="range" id="seek-bar2"  value="0" >
+            </div>
+            <div id="video-controls3">
+                <input class="range" type="range" id="seek-bar3"  value="0" >
             </div>
         </div>
 	</div>

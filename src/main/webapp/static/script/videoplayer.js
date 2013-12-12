@@ -24,10 +24,7 @@ var NPOPlayer = base2.Base.extend({
 				if (autoplay) {
 					this.config.seekTime = Utils.unparseTime(seekTime);
 				}
-
-				this.player = new UGSLPlayer(document.getElementById(elementId),
-						'http://embed.player.omroep.nl/slg/ugslplayer.xap',
-						this.config);
+                
 			},
 
 			// update variables
@@ -112,7 +109,8 @@ var onSilverlightLoad = function() {
 
 var JWPlayer = base2.Base.extend({
 	constructor : function(elementId, imageUrl, sourceUrl) {
-		this.evtHandles = [];
+	 	
+      this.evtHandles = [];
 		this.elementId = elementId;
 
 		var self = this;
@@ -136,8 +134,55 @@ var JWPlayer = base2.Base.extend({
 				}
 			}
 		});
-        //alert("I am an alert box!");
-        //moveTo(5);
+         
+        // Video
+        var video = document.getElementById("video");
+
+        // Buttons
+        var playButton = document.getElementById("play-pause");
+        var muteButton = document.getElementById("mute");
+        var fullScreenButton = document.getElementById("full-screen");
+        var stepForwardButton = document.getElementById("step-forward");
+        var stepBackButton = document.getElementById("step-back");
+
+        // Sliders
+        var seekBar = document.getElementById("seek-bar");
+        var volumeBar = document.getElementById("volume-bar");
+
+        //playback
+        var start_time = 5;
+        var end_time = 10;
+
+        video.currentTime = start_time;
+/*       
+        // Event listener for the play/pause button
+        playButton.addEventListener("click", function() {
+            if (video.paused == true) {
+                // Play the video
+                //video.play();
+
+                // Update the button text to 'Pause'
+                //playButton.innerHTML = "Pause";
+            } else {
+                // Pause the video
+                //video.pause();
+
+                // Update the button text to 'Play'
+                //playButton.innerHTML = "Play";
+            }
+        });
+ 
+        // Event listener for the step-forward button
+        stepForwardButton.addEventListener("click", function() {
+            var currTime = video.currentTime;
+            video.currentTime = currTime+0.04;
+        });
+        // Event listener for the step-back button
+        stepBackButton.addEventListener("click", function() {
+            var currTime = video.currentTime;
+            video.currentTime = currTime-0.04;
+        });
+        */
 	},
 
 	getElapsed : function() {

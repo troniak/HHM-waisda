@@ -19,14 +19,15 @@ var Game = base2.Base.extend({
 		
 		this.history = new TaggingHistory();
 		this.scoreboard = new Scoreboard();
+        
+        var playerArgs = {
+            fragmentID: video.fragmentId,
+            startTimeWithinEpisode: video.startTimeWithinEpisode,
+            duration: video.duration,
+            startTime: startTime
+        };
 
 		if (video.playerType == 'NPO') {
-			var playerArgs = {
-				fragmentID: video.fragmentId,
-				startTimeWithinEpisode: video.startTimeWithinEpisode,
-				duration: video.duration,
-				startTime: startTime
-			};
 			this.videoplayer = new NPOPlayer('video', playerArgs);
 		} else if (video.playerType == 'JW') {
 			this.videoplayer = new JWPlayer('video', video.imageUrl, video.sourceUrl);

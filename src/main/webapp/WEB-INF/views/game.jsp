@@ -18,8 +18,8 @@
 			<h1 class="h4 pull-left reset"><c:out value="${game.video.title}" /></h1>			
 			<span id="timer-remaining" class="pull-right"></span>	
 		</header>
-		
-		<section class="reset">
+        
+        <section class="reset">
 			<div id="vid-overlay-screen" class="row-fluid show">
 				<div id="explanation" class="box clean span6">
 					<div id="timer-intro" class="timer-intro"><small>The game starts in</small><strong>00:15</strong></div>
@@ -52,7 +52,32 @@
 				<div id="video" class="video"></div>
 			</div>
 		</section>
-
+        <%--
+        <div id="gameCanvas" class="box span8 relative col-game leading">
+            <div id="video-container">
+                <!-- Video -->
+                <video id="video" width="620" height="365">
+                    <source src="/static/videos/mikethefrog.mp4" type="video/mp4">
+                    <source src="/static/videos/mikethefrog.webm" type="video/webm">
+                    <source src="/static/videos/mikethefrog.ogv" type="video/ogv">
+                    <p>
+                      Your browser doesn't support HTML5 video.
+                      <a href="/videos/mikethefrog.mp4">Download</a> the video instead.
+                    </p>
+                </video>
+                <!-- Video Controls -->
+                <div id="video-controls">
+                    <button type="button" id="play-pause">P</button>
+                    <input type="range" id="seek-bar" value="0">
+                    <button type="button" id="step-back">&lt;</button>
+                    <button type="button" id="step-forward">&gt;</button>
+                    <button type="button" id="mute">M</button>
+                    <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+                    <button type="button" id="full-screen">Full-Screen</button>
+                </div>
+            </div>
+        </div>
+        --%>
 		<footer class="outside">
 			<input type="text" maxlength="42" class="input-mega-xxl" id="inputField" />
 		</footer>
