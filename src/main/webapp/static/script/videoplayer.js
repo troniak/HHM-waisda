@@ -4,8 +4,7 @@ var NPOPlayer = base2.Base.extend({
 				this.elementId = elementId;
 
 				var seekTime = Math.max(0, config.startTime);
-				var autoplay = config.startTime >= 0
-						&& config.startTime < config.duration;
+				var autoplay = config.startTime >= 0 && config.startTime < config.duration;
 
 				this.config = {
 					width : vidPlayerWidth,
@@ -34,9 +33,7 @@ var NPOPlayer = base2.Base.extend({
 
 				// check whether the videoplayer initialized completely
 				if (this.duration != 0) {
-					this
-							.dispatchEvents("tick", [ this.elapsed,
-									this.duration ]);
+					this.dispatchEvents("tick", [ this.elapsed, this.duration ]);
 				}
 			},
 
@@ -114,8 +111,8 @@ var JWPlayer = base2.Base.extend({
 		this.elementId = elementId;
 
 		var self = this;
-
-		this.player = jwplayer(elementId).setup({
+/*
+        this.player = jwplayer(elementId).setup({
 			flashplayer: '/static/mediaplayer-5.9/player.swf',
 			file: sourceUrl,
 			image: imageUrl,
@@ -134,55 +131,8 @@ var JWPlayer = base2.Base.extend({
 				}
 			}
 		});
-         
-        // Video
-        var video = document.getElementById("video");
-
-        // Buttons
-        var playButton = document.getElementById("play-pause");
-        var muteButton = document.getElementById("mute");
-        var fullScreenButton = document.getElementById("full-screen");
-        var stepForwardButton = document.getElementById("step-forward");
-        var stepBackButton = document.getElementById("step-back");
-
-        // Sliders
-        var seekBar = document.getElementById("seek-bar");
-        var volumeBar = document.getElementById("volume-bar");
-
-        //playback
-        var start_time = 5;
-        var end_time = 10;
-
-        video.currentTime = start_time;
-/*       
-        // Event listener for the play/pause button
-        playButton.addEventListener("click", function() {
-            if (video.paused == true) {
-                // Play the video
-                //video.play();
-
-                // Update the button text to 'Pause'
-                //playButton.innerHTML = "Pause";
-            } else {
-                // Pause the video
-                //video.pause();
-
-                // Update the button text to 'Play'
-                //playButton.innerHTML = "Play";
-            }
-        });
- 
-        // Event listener for the step-forward button
-        stepForwardButton.addEventListener("click", function() {
-            var currTime = video.currentTime;
-            video.currentTime = currTime+0.04;
-        });
-        // Event listener for the step-back button
-        stepBackButton.addEventListener("click", function() {
-            var currTime = video.currentTime;
-            video.currentTime = currTime-0.04;
-        });
-        */
+*/
+        /**/
 	},
 
 	getElapsed : function() {

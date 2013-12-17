@@ -61,7 +61,7 @@ var Game = base2.Base.extend({
 				this.videoplayer.addEvent("tick", this.onVideoTick.bind(this));
 				this.videoplayer.addEvent("fragmentEnd", this.endGame.bind(this));
 
-				this.videoplayer.play();
+				//this.videoplayer.play();
 
 				jQuery("#inputField").keydown(jQuery.proxy(this.addTag, this));
 				jQuery("#inputField").keydown(jQuery.proxy(this.setStartTime, this));
@@ -146,13 +146,15 @@ var Game = base2.Base.extend({
 	
 	setStartTime: function(evt) {
 		if (evt.keyCode != 13 && evt.target.value.length == 0)
-			this.tagStartTime = this.videoplayer.getElapsed();
+			//this.tagStartTime = this.videoplayer.getElapsed();
+			this.tagStartTime = 0;
 	},
 	
 	addTag: function(evt) {
 		if (evt.keyCode == 13) {
 			var tagName = this.cleanTag(evt.target.value);
-			var time = this.videoplayer.getElapsed();
+			//var time = this.videoplayer.getElapsed();
+			var time = getElapsed();//0;//this.html5video.currentTime; 
 			// store tag if not already added
 			if (this.isValidTag(tagName)) {
 				jQuery.ajax("/tag-entry", {
