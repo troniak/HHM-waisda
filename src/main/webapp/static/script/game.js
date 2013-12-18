@@ -63,8 +63,9 @@ var Game = base2.Base.extend({
 
 				//this.videoplayer.play();
 
-				jQuery("#inputField").keydown(jQuery.proxy(this.addTag, this));
 				jQuery("#inputField").keydown(jQuery.proxy(this.setStartTime, this));
+				jQuery("#inputField").keydown(jQuery.proxy(this.setEndTime, this));
+				jQuery("#inputField").keydown(jQuery.proxy(this.addTag, this));
 			}, this), 100); // Deze delay is een fix voor een bug in IE7/8
 		} else {
 			this.updateQueueTime(realElapsed);
@@ -97,7 +98,7 @@ var Game = base2.Base.extend({
 	},
 	
 	update: function() {
-		var elapsed = this.videoplayer.getElapsed();
+		var elapsed = getElapsed();
 		
 		if (elapsed > 0) {
 			this.beenPlaying = true;
@@ -107,7 +108,7 @@ var Game = base2.Base.extend({
 			// The videoplayer has reached the end of the video and jumped back to elaped = 0. The game is over.
 //			this.endGame();
 		} else {
-			var elapsed = this.videoplayer.getElapsed();
+			var elapsed = getElapsed();
 			if (!elapsed) {
 				elapsed = 0;
 			}
@@ -120,7 +121,7 @@ var Game = base2.Base.extend({
 					if (responseJSON.state == "ENDED") {
 						this.endGame();
 					} else {
-						this.history.update(responseJSON.tagEntries, this.videoplayer.getElapsed());
+						this.history.update(responseJSON.tagEntries, getElapsed());
 						if (jQuery('#playerSessionScore')) {
 							jQuery('#playerSessionScore').html(responseJSON.gameScore);
 						}
@@ -135,8 +136,7 @@ var Game = base2.Base.extend({
 		}
 	},
 	
-	cleanTag: function(tagName)
-	{
+	cleanTag: function(tagName){
 		return tagName.trim().replace(/\s+/g, " ");
 	},
 	
@@ -145,15 +145,23 @@ var Game = base2.Base.extend({
 	},
 	
 	setStartTime: function(evt) {
-		if (evt.keyCode != 13 && evt.target.value.length == 0)
-			//this.tagStartTime = this.videoplayer.getElapsed();
-			this.tagStartTime = 0;
+		if (evt.keyCode != 13 && evt.target.value.length == 0){
+			this.tagStartTime = getElapsed(); //when user starts typing the tag
+			//this.tagStartTime = getTagStartTime();
+        }
+	},
+
+	setEndTime: function(evt) {
+		if (evt.keyCode != 13 && evt.target.value.length == 0){
+			//this.tagStartTime = getElapsed();
+			//this.tagEndTime = getTagEndTime();
+        }
 	},
 	
 	addTag: function(evt) {
 		if (evt.keyCode == 13) {
 			var tagName = this.cleanTag(evt.target.value);
-			//var time = this.videoplayer.getElapsed();
+			//var time = getElapsed();
 			var time = getElapsed();//0;//this.html5video.currentTime; 
 			// store tag if not already added
 			if (this.isValidTag(tagName)) {
@@ -161,7 +169,7 @@ var Game = base2.Base.extend({
 					type: "POST",
 					success:
 						jQuery.proxy(function(tagEntryJson) {
-							// add tag to history
+							// add tag to history (on side of page)
 							if (tagEntryJson) {
 								this.history.update([tagEntryJson]);
 							}
@@ -170,6 +178,8 @@ var Game = base2.Base.extend({
 						{
 							tag: tagName,
 							gameTime: time,
+							tagStartTime: getTagStartTime(),
+							tagEndTime: getTagEndTime(),
 							typingDuration: time - this.tagStartTime,
 							'game.id': this.gameId
 						}

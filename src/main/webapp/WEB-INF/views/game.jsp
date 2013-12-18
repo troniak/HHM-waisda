@@ -146,12 +146,33 @@
         var duration = Math.ceil(Math.min(end_time,html5video.duration) * 1000);
         return duration;
     }
+    function getTagStartTime(){
+        return Math.ceil(getVidTime(startTagBar.value) * 1000);
+    }
+    function getTagEndTime(){
+        return Math.ceil(getVidTime(endTagBar.value) * 1000);
+    }
+	// Event listener for the volume bar
+	volumeBar.addEventListener("change", function() {
+        html5video.playbackRate = volumeBar.value / volumeBar.max;
+    });
+
+    function getVidTime(barValue){
+        var seek_mult = barValue / 100;
+        var time = start_time + (end_time - start_time) * seek_mult;
+        return time;
+    }
+    function getBarValue(vidTime){
+        var value = (vidTime - start_time) / (end_time - start_time) * 100;
+        return value;
+    }
+
     // Calculate and update the seekBar value from video time
     function updateSeekBar(){
-        var value = (html5video.currentTime - start_time) / (end_time - start_time) * 100;
+        var value = getBarValue(html5video.currentTime);
         seekBar.value = value;
         if(html5video.paused == false && seekBar.value >= 100){
-            html5video.pause()
+            html5video.pause();
             seekBar.value = 0;
             html5video.currentTime = start_time;
         }
@@ -163,8 +184,7 @@
     // Update the html5video time from seekBar value
     function updateVidTime() {
         // multiplier from 0 to 1
-        var seek_mult = seekBar.value / 100;
-        var time = start_time + (end_time - start_time) * seek_mult;
+        var time = getVidTime(seekBar.value);
         html5video.currentTime = time;
     }
     

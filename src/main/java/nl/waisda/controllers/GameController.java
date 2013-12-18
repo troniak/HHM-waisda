@@ -206,16 +206,18 @@ public class GameController {
 					tagEntry.getNormalizedTag(), tagEntry.getGameTime(),
 					user.getId())) {
 				log.info(String
-						.format("Ignoring duplicate entry %s for game %d, user %d, time %d",
-								tagEntry.getNormalizedTag(), tagEntry.getGame()
+						.format("Ignoring duplicate entry %s (start %d, end %d) for game %d, user %d, time %d",
+								tagEntry.getNormalizedTag(), tagEntry.getTagStartTime(),
+								tagEntry.getTagEndTime(), tagEntry.getGame()
 										.getId(), user.getId(), tagEntry
 										.getGameTime()));
 				return null;
 			}
 		} else {
 			log.info(String
-					.format("Ignoring tag %s for game %d, user %d, time %d (actual game time %d, delay %d)",
-							tagEntry.getTag(), tagEntry.getGame().getId(),
+					.format("Ignoring tag %s (start %d, end %d) for game %d, user %d, time %d (actual game time %d, delay %d)",
+							tagEntry.getTag(), tagEntry.getTagStartTime(),
+							tagEntry.getTagEndTime(), tagEntry.getGame().getId(),
 							user.getId(), tagEntry.getGameTime(),
 							game.getElapsed(),
 							game.getElapsed() - tagEntry.getGameTime()));
@@ -226,8 +228,9 @@ public class GameController {
 		scoringService.updateMatchAndStore(tagEntry, true);
 
 		log.info(String
-				.format("Registering tag %s #%d with score %d for game %d, user %d, time %d (actual game time %d, delay %d)",
-						tagEntry.getTag(), tagEntry.getId(), tagEntry.getScore(), tagEntry.getGame()
+				.format("Registering tag %s (start %d, end %d) #%d with score %d for game %d, user %d, time %d (actual game time %d, delay %d)",
+						tagEntry.getTag(), tagEntry.getTagStartTime(), tagEntry.getTagEndTime(),
+						tagEntry.getId(), tagEntry.getScore(), tagEntry.getGame()
 								.getId(), user.getId(), tagEntry.getGameTime(),
 						game.getElapsed(),
 						game.getElapsed() - tagEntry.getGameTime()));

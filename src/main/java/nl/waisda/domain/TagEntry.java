@@ -67,6 +67,14 @@ public class TagEntry implements Serializable {
 	@Basic(optional = false)
 	private int gameTime;
 
+	/** Time of start-tag. */
+	@Basic(optional = true)
+	private int tagStartTime;
+
+	/** Time of end-tag. */
+	@Basic(optional = true)
+	private int tagEndTime;
+
 	@Basic(optional = false)
 	private int typingDuration;
 
@@ -218,6 +226,22 @@ public class TagEntry implements Serializable {
 
 	public void setGameTime(int gameTime) {
 		this.gameTime = gameTime;
+	}
+
+	public int getTagStartTime() {
+		return tagStartTime;
+	}
+
+	public void setTagStartTime(int tagTime) {
+		this.tagStartTime = tagTime;
+	}
+
+	public int getTagEndTime() {
+		return tagEndTime;
+	}
+
+	public void setTagEndTime(int tagTime) {
+		this.tagEndTime = tagTime;
 	}
 
 	public int getTypingDuration() {
