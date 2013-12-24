@@ -63,6 +63,10 @@ public class Video {
 	@Basic
 	private Integer startTime;
 
+	/** end time within episode, in ms. */
+	@Basic
+	private Integer endTime;
+
 	/** Fragmentenrubriek zoals in MBH dump. */
 	private Integer sectionNid;
 
@@ -102,6 +106,10 @@ public class Video {
 
 	public Integer getStartTime() {
 		return startTime;
+	}
+
+	public Integer getEndTime() {
+		return endTime;
 	}
 
 	public Integer getSectionNid() {

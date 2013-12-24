@@ -58,9 +58,10 @@
         --%>   
             <div id="video-container" class="outside">
                 <video class="video" id="video">
-                    <source src="/static/videos/mikethefrog.mp4" type="video/mp4">
+                    <source id="vidsource" src="${game.video.sourceUrl}" type="video/webm">
+                    <%--<source src="/static/videos/mikethefrog.mp4" type="video/mp4">
                     <source src="/static/videos/mikethefrog.webm" type="video/webm">
-                    <source src="/static/videos/mikethefrog.ogv" type="video/ogv">
+                    <source src="/static/videos/mikethefrog.ogv" type="video/ogv">--%>
                     <p>
                       Your browser doesn't support HTML5 video.
                       <a href="/videos/mikethefrog.mp4">Download</a> the video instead.
@@ -117,6 +118,7 @@
 <script type="text/javascript">
     // Video
     var html5video = document.getElementById("video");
+    var vidsource  = document.getElementById("vidsource");
 
     // Buttons
     var playButton = document.getElementById("play-pause");
@@ -132,24 +134,27 @@
     var endTagBar = document.getElementById("end-tag-bar");
 
     //playback
-    var start_time = 5;
-    var end_time = 10;
+    var start_time = ${game.video.startTime};//5;
+    var end_time = ${game.video.endTime};//10;
+    if(end_time < 0){
+        end_time = ${game.video.duration} / 1000; //convert ms to seconds
+    }
     
     window.onload = function() {
         html5video.currentTime = start_time;
     }
-    function getElapsed(){
+    function getElapsed(){ //return time elapsed (in milliseconds)
         var elapsed = Math.ceil(html5video.currentTime * 1000);
         return elapsed;
     }
-    function getDuration(){
-        var duration = Math.ceil(Math.min(end_time,html5video.duration) * 1000);
+    function getDuration(){ //return video duration (in milliseconds)
+        var duration = Math.ceil(Math.min(end_time-start_time,html5video.duration) * 1000);
         return duration;
     }
-    function getTagStartTime(){
+    function getTagStartTime(){ //get time of video at start tag (in ms)
         return Math.ceil(getVidTime(startTagBar.value) * 1000);
     }
-    function getTagEndTime(){
+    function getTagEndTime(){ //get time of video at end tag (in ms)
         return Math.ceil(getVidTime(endTagBar.value) * 1000);
     }
 	// Event listener for the volume bar
@@ -163,7 +168,9 @@
         return time;
     }
     function getBarValue(vidTime){
+        //alert(vidTime);
         var value = (vidTime - start_time) / (end_time - start_time) * 100;
+        //alert('value: ' + value);
         return value;
     }
 
@@ -176,8 +183,8 @@
             seekBar.value = 0;
             html5video.currentTime = start_time;
         }
-        var elapsed = getElapsed();//html5video.currentTime * 1000;
-        var duration = getDuration();//Math.min(end_time,html5video.duration) * 1000;
+        var elapsed = getElapsed();
+        var duration = getDuration();
         game.videoplayer.dispatchEvents("tick", [ elapsed, duration ]);
     }
 
@@ -226,11 +233,13 @@
 
         // Event listener for the step-forward button
         stepForwardButton.addEventListener("click", function() {
+            html5video.pause();
             var currTime = html5video.currentTime;
             html5video.currentTime = currTime+0.04;
         });
         // Event listener for the step-back button
         stepBackButton.addEventListener("click", function() {
+            html5video.pause();
             var currTime = html5video.currentTime;
             html5video.currentTime = currTime-0.04;
         });/**/
