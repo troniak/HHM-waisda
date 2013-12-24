@@ -74,13 +74,15 @@
                     <input class="range" type="range" id="seek-bar" value="0">
                     <button type="button" id="step-back">&lt;</button>
                     <button type="button" id="step-forward">&gt;</button>
-                    <button type="button" id="mute">M</button>
+                    <%--<button type="button" id="mute">M</button>--%>
                     <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
                 </div>
                 <div id="video-controls2">
+                    <button type="button" id="start-match">M</button>
                     <input class="range" type="range" id="start-tag-bar"  value="0" >
                 </div>
                 <div id="video-controls3">
+                    <button type="button" id="end-match">M</button>
                     <input class="range" type="range" id="end-tag-bar"  value="0" >
                 </div>
             </div>
@@ -123,6 +125,8 @@
     // Buttons
     var playButton = document.getElementById("play-pause");
     var muteButton = document.getElementById("mute");
+    var startMatchButton = document.getElementById("start-match");
+    var endMatchButton = document.getElementById("end-match");
     var fullScreenButton = document.getElementById("full-screen");
     var stepForwardButton = document.getElementById("step-forward");
     var stepBackButton = document.getElementById("step-back");
@@ -228,6 +232,14 @@
             } else {
                 html5video.pause();
             }
+        });
+        // Event listener for the start-match button to match start-tag bar with seekbar
+        startMatchButton.addEventListener("click", function() {
+                startTagBar.value = seekBar.value;
+        });
+        // Event listener for the start-match button to match end-tag bar with seekbar
+        endMatchButton.addEventListener("click", function() {
+                endTagBar.value = seekBar.value;
         });
         
 
