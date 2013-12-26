@@ -154,6 +154,16 @@ public class TagEntry implements Serializable {
 				// Pioneer only matters if a matching tag entry was found.
 				score += 100;
 			}
+
+            //start and end tag times are recorded
+            if(this.getTagStartTime() != this.getTagEndTime()){
+                if(matchingTagEntry.getTagStartTime() == this.getTagStartTime()){
+                    score += 100;
+                }
+                if(matchingTagEntry.getTagEndTime() == this.getTagEndTime()){
+                    score += 100;
+                }
+            }
 		}
 
 		if (score == 0) {

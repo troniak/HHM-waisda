@@ -59,7 +59,7 @@
             <div id="video-container" class="outside">
                 <video class="video" id="video">
                     <source id="vidsource" src="${game.video.sourceUrl}" type="video/webm">
-                    <%--<source src="/static/videos/mikethefrog.mp4" type="video/mp4">
+                    <%--<source src="/static/videos/bike.mp4" type="video/mp4">
                     <source src="/static/videos/mikethefrog.webm" type="video/webm">
                     <source src="/static/videos/mikethefrog.ogv" type="video/ogv">--%>
                     <p>
