@@ -255,6 +255,18 @@
             var currTime = html5video.currentTime;
             html5video.currentTime = currTime-0.04;
         });/**/
+        // Event listener for the step-forward button
+        stepForwardButton.addEventListener("onmousedown", function() {
+        });
+        // Event listener for the step-back button
+        stepBackButton.addEventListener("onmousedown", function() {
+        });
+        // Event listener for the step-forward button
+        stepForwardButton.addEventListener("onmouseup", function() {
+        });
+        // Event listener for the step-back button
+        stepBackButton.addEventListener("onmouseup", function() {
+        });
         
         // Update the seek bar as the html5video plays
         html5video.addEventListener("timeupdate", updateSeekBar);

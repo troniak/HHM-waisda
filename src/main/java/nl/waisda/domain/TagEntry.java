@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.lang.Math;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -45,6 +46,8 @@ import org.hibernate.annotations.Index;
 public class TagEntry implements Serializable {
 
 	private static final long serialVersionUID = -3032438049433062208L;
+
+	private static final int matchWindowSize_ms = 250; // 1/4 second
 
 	public static final DateFormat DATE_FORMAT = new SimpleDateFormat(
 			"EEEE d MMMM yyyy", Util.DUTCH_LOCALE);
@@ -152,16 +155,15 @@ public class TagEntry implements Serializable {
 
 			if (pioneer) {
 				// Pioneer only matters if a matching tag entry was found.
-				score += 100;
+				score += 250;
 			}
-
-            //start and end tag times are recorded
-            if(this.getTagStartTime() != this.getTagEndTime()){
-                if(matchingTagEntry.getTagStartTime() == this.getTagStartTime()){
-                    score += 100;
+            
+            if(this.getTagStartTime() != this.getTagEndTime()){ //start and end tag times are recorded
+                if(Math.abs(matchingTagEntry.getTagStartTime() - this.getTagStartTime()) <= matchWindowSize_ms){
+                    score += 50;
                 }
-                if(matchingTagEntry.getTagEndTime() == this.getTagEndTime()){
-                    score += 100;
+                if(Math.abs(matchingTagEntry.getTagEndTime() - this.getTagEndTime()) <= matchWindowSize_ms){
+                    score += 50;
                 }
             }
 		}
